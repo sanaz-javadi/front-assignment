@@ -1,0 +1,182 @@
+{% extends "common/templates/base_app.html" %}
+{% load i18n %}
+{% load l10n %}
+{% load common_tags %}
+{% load form_tags %}
+{% load format_tags %}
+{% load index_tags %}
+{% load pagination_tags %}
+
+{% block page_title %}{% trans "Contacts" context "unknown" %}{% endblock %}
+
+{% block main_class %}index-view{% endblock %}
+
+{% block main_header %}
+    <header id="main-header">
+        {% trans "Contacts" context "unknown" as title %}
+        {% main_heading title=title %}
+        <menu class="index-menu">
+            {% url2 contacts_new as new_url %}{% trans "New Contact" context "unknown" as btn_text %}
+            {% url2 contacts_new as new_url %}{% form_button text=btn_text css_class="new busy" url=new_url %}
+        </menu>
+    </header>
+{% endblock %}
+
+{% block main %}
+    {% if display_help_box and not account.is_shop_account %}
+        <div class="help-box index-help">
+            <a href="#" class="close" data-url="{% url2 users_help_close %}" data-page="{{ help_status_flag }}"></a>
+            {% blocktrans context "unknown" %}Contacts are companies or persons to whom you send invoices. You can enter address and contact details such as email and phone number for each contact.{% endblocktrans %}
+        </div>
+    {% endif %}
+
+    {% if companies %}
+        <div class="index-top">
+            <div class="index-filter"></div>
+            <div class="index-menu">
+                <menu>
+                    <div class="popup-parent view-invoices-tooltip-wrapper"
+                         title='{% trans "Invoices can be viewed for up to 50 contacts." context "contacts.menu.view.tooltip" %}'>
+                      <button class="popup group-first index normal view-invoices" role="toggle" aria-haspopup="true" aria-controls="view-more">
+                        <span>{% trans "View" context "contacts.menu.view" %}</span><i></i>
+                      </button>
+                      <div id="view-more" class="popup-menu-parent button-menu-parent first-popup">
+                        <ul class="popup-menu">
+                          <li>
+                            {% url2 invoices_index as view_invoices_url %}
+                            <a data-url-path="{{ view_invoices_url  }}" data-param-name="fcn" class="menu submit-build-url">
+                              {% trans "Invoices" context "contacts.menu.invoices" %}
+                            </a>
+                          </li>
+                          <li>
+                            {% url2 invoices_index_proforma as view_invoices_url %}
+                            <a data-url-path="{{ view_invoices_url  }}" data-param-name="fcn" class="menu submit-build-url">
+                              {% trans "Pro forma invoices" context "contacts.menu.proforma" %}
+                            </a>
+                          </li>
+                          <li>
+                            {% url2 invoices_index_quote as view_invoices_url %}
+                            <a data-url-path="{{ view_invoices_url  }}" data-param-name="fcn" class="menu submit-build-url">
+                              {% trans "Quotes" context "contacts.menu.quotes" %}
+                            </a>
+                          </li>
+                          <li>
+                            {% url2 invoices_index_credit as view_invoices_url %}
+                            <a data-url-path="{{ view_invoices_url  }}" data-param-name="fcn" class="menu submit-build-url">
+                              {% trans "Credit notes" context "contacts.menu.credit_notes" %}
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="popup-parent">
+                        <button class="popup index group-last normal" role="toggle" aria-haspopup="true" aria-controls="more-more">
+                            <span>{% trans "More" context "unknown" %}</span><i></i>
+                        </button>
+                        <div id="menu-more" class="popup-menu-parent button-menu-parent first-popup">
+                            <ul class="popup-menu">
+                                {% url2 contacts_delete as delete_url %}
+                                <li><a class="menu submit delete index contacts-index-delete" data-action="{{ delete_url }}"><i></i>{% trans "Delete" context "unknown" %}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </menu>
+                <span class="no-select">{# Translators: Displayed when an action button is clicked and no row is selected. #}
+                    {% trans "No contacts selected." context "unknown" %}
+                </span>
+            </div>
+            <div class="index-message"></div>
+
+            <div
+                id="confirm-delete-modal"
+                data-title="{% trans 'Delete contacts?' context 'contacts.delete_dialog.title' %}"
+                data-text="{% trans 'Are you sure you want to delete contacts?' context 'contacts.delete_dialog.text' %}"
+                data-remove="{% trans 'Delete' context 'contacts.delete_dialog.remove' %}"
+                data-cancel="{% trans 'Cancel' context 'contacts.delete_dialog.cancel' %}"
+                class="hidden"
+            ></div>
+        </div>
+
+        <form class="index-form form" method="post" action="">
+            <table class="contacts-table index-table">
+                <thead>
+                    <tr class="header">
+                        <th class="checkbox cell first-cell">
+                            <div><input type="checkbox" name="menu" data-total-count="{{ companies.paginator.count|unlocalize }}" data-limit-count="{{ pagination_limit|unlocalize }}" value="" /></div>
+                        </th>
+                        {% trans "Company" context "unknown" as trans_msg %}
+                        <th class="cell">{% index_header trans_msg "n" %}</th>
+                        {% trans "Address" context "unknown" as trans_msg %}
+                        <th class="cell">{% index_header trans_msg "a" %}</th>
+                        {% trans "Contact Name" context "unknown" as trans_msg %}
+                        <th class="cell">{% index_header trans_msg "c" %}</th>
+                        {% trans "Phone" context "unknown" as trans_msg %}
+                        <th class="cell last-cell">{% index_header trans_msg "p" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for company in companies %}
+                        <tr class="{% cycle "odd" "even" %} {{ company.index_class }}">
+                            <td class="checkbox cell hoverable first-cell">
+                                <input type="checkbox" name="id" value="{{ company.id|unlocalize }}" />
+                            </td>
+                            <td class="name cell hoverable link">
+                                {% spaceless %}
+                                    <a href="{% url2 contacts_view company.id %}" class="company-url">
+                                        {% if company.email %}
+                                            {{ company.company_name|default:company.email|default_if_none:'' }}
+                                        {% else %}
+                                            {{ company.company_name|default_if_none:'' }}
+                                        {% endif %}
+                                    </a>
+                                {% endspaceless %}
+                            </td>
+                            <td class="address cell last-cell hoverable">
+                                {% get_address_inline company request.account.country as address_text %}
+                                <div class="address" data-id="{{ company.billing_address_id|default_if_none:''|unlocalize }}">
+                                    {% if address_text %}{{ address_text }}{% endif %}
+                                </div>
+                            </td>
+                            <td class="contact cell hoverable">
+                                <div class="contact-name" data-id="{{ company.billing_contact_id|default_if_none:''|unlocalize }}">
+                                    {% if company.first_name or company.last_name %}{{ company.first_name }} {{ company.last_name }}{% endif %}
+                                </div>
+                            </td>
+                            <td class="phone cell last-cell hoverable">
+                                <div class="contact-phone">
+                                    {% if company.phone_number %}{{ company.phone_number }}{% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% render_pagination companies %}
+            {% csrf_token %}
+            <input name="index_all_enabled" type="hidden" value="0"/>
+        </form>
+    {% else %}
+        <div class="index-empty">
+            <div>{% blocktrans context "unknown" %}There are no contacts in your account yet.{% endblocktrans %}</div>
+            <a href="{% url "contacts_new" %}">{% blocktrans context "unknown" %}Add a new contact.{% endblocktrans %}</a>
+        </div>
+    {% endif %}
+{% endblock main %}
+
+{% block script_inline %}
+    {% form_script_busy %}
+    {% index_script_common "c" %}
+    {% include "contact_index_script.js" %}
+
+    $(document).ready(function() {
+        $('button.popup').on('click', function(ev) { return Forms.clickPopup(ev, this); });
+        $('html').on('click', function(event) { Forms.hidePopup(event); });
+
+        ContactsIndex.init({
+            csrf_token: '{{ csrf_token }}',
+            addresses_url: '{% url 'contacts_addresses_list' %}',
+            contacts_url: '{% url 'contacts_contacts_list' %}'
+        });
+    });
+{% endblock %}

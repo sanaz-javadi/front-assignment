@@ -1,0 +1,47 @@
+/*
+ * The Typekit service used to deliver this font or fonts for use on websites
+ * is provided by Adobe and is subject to these Terms of Use
+ * http://www.adobe.com/products/eulas/tou_typekit. For font license
+ * information, see the list below.
+ *
+ * kepler-std:
+ *   - http://typekit.com/eulas/000000000000000000013141
+ * kepler-std-extended-display:
+ *   - http://typekit.com/eulas/000000000000000000013042
+ * soleil:
+ *   - http://typekit.com/eulas/00000000000000007735a1ac
+ *   - http://typekit.com/eulas/00000000000000007735a1b1
+ *
+ * © 2009-2026 Adobe Systems Incorporated. All Rights Reserved.
+ */
+/*{"last_published":"2021-11-16 12:35:12 UTC"}*/
+
+@import url("https://p.typekit.net/p.css?s=1&k=nnc1ilc&ht=tk&f=17001.17005.9870.18212&a=2511155&app=typekit&e=css");
+
+@font-face {
+font-family:"soleil";
+src:url("https://use.typekit.net/af/5d2da8/00000000000000007735a1ac/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/5d2da8/00000000000000007735a1ac/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/5d2da8/00000000000000007735a1ac/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:700;font-stretch:normal;
+}
+
+@font-face {
+font-family:"soleil";
+src:url("https://use.typekit.net/af/3ec29d/00000000000000007735a1b1/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/3ec29d/00000000000000007735a1b1/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/3ec29d/00000000000000007735a1b1/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+
+@font-face {
+font-family:"kepler-std";
+src:url("https://use.typekit.net/af/d0cd82/000000000000000000013141/27/l?primer=7fa3915bdafdf03041871920a205bef951d72bf64dd4c4460fb992e3ecc3a862&fvd=i4&v=3") format("woff2"),url("https://use.typekit.net/af/d0cd82/000000000000000000013141/27/d?primer=7fa3915bdafdf03041871920a205bef951d72bf64dd4c4460fb992e3ecc3a862&fvd=i4&v=3") format("woff"),url("https://use.typekit.net/af/d0cd82/000000000000000000013141/27/a?primer=7fa3915bdafdf03041871920a205bef951d72bf64dd4c4460fb992e3ecc3a862&fvd=i4&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:400;font-stretch:normal;
+}
+
+@font-face {
+font-family:"kepler-std-extended-display";
+src:url("https://use.typekit.net/af/7bc99b/000000000000000000013042/27/l?primer=7fa3915bdafdf03041871920a205bef951d72bf64dd4c4460fb992e3ecc3a862&fvd=i4&v=3") format("woff2"),url("https://use.typekit.net/af/7bc99b/000000000000000000013042/27/d?primer=7fa3915bdafdf03041871920a205bef951d72bf64dd4c4460fb992e3ecc3a862&fvd=i4&v=3") format("woff"),url("https://use.typekit.net/af/7bc99b/000000000000000000013042/27/a?primer=7fa3915bdafdf03041871920a205bef951d72bf64dd4c4460fb992e3ecc3a862&fvd=i4&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:400;font-stretch:normal;
+}
+
+.tk-soleil { font-family: "soleil",sans-serif; }
+.tk-kepler-std { font-family: "kepler-std",serif; }
+.tk-kepler-std-extended-display { font-family: "kepler-std-extended-display",serif; }
