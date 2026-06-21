@@ -4,7 +4,6 @@
 
 - `contacts_index.jinja` → main template migrated to Tailwind
 - `contact.html` → static HTML used for visual comparison and regression check
-- `tailwind.config.js` → Tailwind v3 configuration
 - `app_ltr.css` → not modified, beacuse is a compiled, and shared across the entire app.
 
 ---
