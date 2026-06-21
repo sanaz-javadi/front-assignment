@@ -1,9 +1,10 @@
 # Tailwind Migration Summary
 
-## Changes files
+## Changed Files
 
 - `contacts_index.jinja` → main template migrated to Tailwind
 - `contact.html` → static HTML used for visual comparison and regression check
+- `tailwind.config.js` → added to configure Tailwind for this project
 - `app_ltr.css` → not modified, beacuse is a compiled, and shared across the entire app.
 
 ---
@@ -70,7 +71,7 @@ btn-secondary
 
 ---
 
-## Notes / trade-offs
+## trade-offs
 
 - `important: true` used for compatibility with legacy CSS
 - `preflight: false` used to avoid resetting global styles
