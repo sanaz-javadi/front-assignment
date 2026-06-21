@@ -12,10 +12,10 @@
 {% block main_class %}index-view{% endblock %}
 
 {% block main_header %}
-    <header id="main-header">
+    <header id="main-header" class="w-[750px] flex items-center justify-between">
         {% trans "Contacts" context "unknown" as title %}
         {% main_heading title=title %}
-        <menu class="index-menu">
+        <menu class="pt-[3px] pb-[14px]">
             {% url2 contacts_new as new_url %}{% trans "New Contact" context "unknown" as btn_text %}
             {% url2 contacts_new as new_url %}{% form_button text=btn_text css_class="new busy" url=new_url %}
         </menu>
@@ -24,45 +24,45 @@
 
 {% block main %}
     {% if display_help_box and not account.is_shop_account %}
-        <div class="help-box index-help">
-            <a href="#" class="close" data-url="{% url2 users_help_close %}" data-page="{{ help_status_flag }}"></a>
+        <div class="help-box bg-[#F0F0F0] border-l-[3px] border-l-[#66CCFF] border-solid text-[14px] leading-[1.5em] mb-[24px] py-[20px] px-[26px] pr-[34px] relative -mt-[11px]">
+            <a href="#" class="close text-center absolute top-[8px] right-[2px] w-[20px] h-[20px] text-[11px] no-underline before:content-['\e646'] before:font-[themify] before:text-[#777777] hover:before:text-black hover:no-underline" data-url="{% url2 users_help_close %}" data-page="{{ help_status_flag }}"></a>
             {% blocktrans context "unknown" %}Contacts are companies or persons to whom you send invoices. You can enter address and contact details such as email and phone number for each contact.{% endblocktrans %}
         </div>
     {% endif %}
 
     {% if companies %}
-        <div class="index-top">
-            <div class="index-filter"></div>
+        <div class="index-top flex flex-wrap justify-between">
+            <div class="text-[#666] text-[13.8px] font-normal mt-[7px] mb-[7px] ml-[9px]"></div>
             <div class="index-menu">
-                <menu>
-                    <div class="popup-parent view-invoices-tooltip-wrapper"
+                <menu class="flex items-center justify-end pt-[3px] pb-[14px]">
+                    <div class="popup-parent relative view-invoices-tooltip-wrapper"
                          title='{% trans "Invoices can be viewed for up to 50 contacts." context "contacts.menu.view.tooltip" %}'>
-                      <button class="popup group-first index normal view-invoices" role="toggle" aria-haspopup="true" aria-controls="view-more">
-                        <span>{% trans "View" context "contacts.menu.view" %}</span><i></i>
+                      <button class="popup index normal view-invoices bg-[#dedede] text-[#222] text-[11px] font-medium uppercase py-[8px] px-[16px] leading-[1.3em] border-0 rounded-none outline-none mr-[1px] hover:bg-[#e5e5e5] cursor-pointer" role="toggle" aria-haspopup="true" aria-controls="view-more">
+                        <span>{% trans "View" context "contacts.menu.view" %}</span><i class="leading-[1.2] before:content-['\f0d7'] before:font-[Font_Awesome_5_Pro] before:font-black before:pl-[2px] before:w-[0.8em] before:inline-block before:text-[1em] before:not-italic before:leading-[1em] before:text-right before:antialiased"></i>
                       </button>
-                      <div id="view-more" class="popup-menu-parent button-menu-parent first-popup">
-                        <ul class="popup-menu">
+                      <div id="view-more" class="popup-menu-parent absolute top-[33px] left-px right-px z-[15] bg-[#f0f0f0] border-t border-[rgba(0,0,0,0.12)] shadow-[0_1px_2px_0_rgba(0,0,0,0.4)]">
+                        <ul class="list-none m-0">
                           <li>
                             {% url2 invoices_index as view_invoices_url %}
-                            <a data-url-path="{{ view_invoices_url  }}" data-param-name="fcn" class="menu submit-build-url">
+                            <a data-url-path="{{ view_invoices_url  }}" data-param-name="fcn" class="menu submit-build-url block border-0 text-[#222] text-[11px] font-medium uppercase py-[8px] px-[16px] m-0 cursor-pointer no-underline whitespace-nowrap transition-colors duration-200 hover:bg-[#f8f8f8] hover:text-[#111]">
                               {% trans "Invoices" context "contacts.menu.invoices" %}
                             </a>
                           </li>
                           <li>
                             {% url2 invoices_index_proforma as view_invoices_url %}
-                            <a data-url-path="{{ view_invoices_url  }}" data-param-name="fcn" class="menu submit-build-url">
+                            <a data-url-path="{{ view_invoices_url  }}" data-param-name="fcn" class="menu submit-build-url block border-0 text-[#222] text-[11px] font-medium uppercase py-[8px] px-[16px] m-0 cursor-pointer no-underline whitespace-nowrap transition-colors duration-200 hover:bg-[#f8f8f8] hover:text-[#111]">
                               {% trans "Pro forma invoices" context "contacts.menu.proforma" %}
                             </a>
                           </li>
                           <li>
                             {% url2 invoices_index_quote as view_invoices_url %}
-                            <a data-url-path="{{ view_invoices_url  }}" data-param-name="fcn" class="menu submit-build-url">
+                            <a data-url-path="{{ view_invoices_url  }}" data-param-name="fcn" class="menu submit-build-url block border-0 text-[#222] text-[11px] font-medium uppercase py-[8px] px-[16px] m-0 cursor-pointer no-underline whitespace-nowrap transition-colors duration-200 hover:bg-[#f8f8f8] hover:text-[#111]">
                               {% trans "Quotes" context "contacts.menu.quotes" %}
                             </a>
                           </li>
                           <li>
                             {% url2 invoices_index_credit as view_invoices_url %}
-                            <a data-url-path="{{ view_invoices_url  }}" data-param-name="fcn" class="menu submit-build-url">
+                            <a data-url-path="{{ view_invoices_url  }}" data-param-name="fcn" class="menu submit-build-url block border-0 text-[#222] text-[11px] font-medium uppercase py-[8px] px-[16px] m-0 cursor-pointer no-underline whitespace-nowrap transition-colors duration-200 hover:bg-[#f8f8f8] hover:text-[#111]">
                               {% trans "Credit notes" context "contacts.menu.credit_notes" %}
                             </a>
                           </li>
@@ -70,14 +70,14 @@
                       </div>
                     </div>
 
-                    <div class="popup-parent">
-                        <button class="popup index group-last normal" role="toggle" aria-haspopup="true" aria-controls="more-more">
-                            <span>{% trans "More" context "unknown" %}</span><i></i>
+                    <div class="popup-parent relative">
+                        <button class="popup index normal bg-[#dedede] text-[#222] text-[11px] font-medium uppercase py-[8px] px-[16px] leading-[1.3em] border-0 rounded-none outline-none ml-0 hover:bg-[#e5e5e5] cursor-pointer" role="toggle" aria-haspopup="true" aria-controls="more-more">
+                            <span>{% trans "More" context "unknown" %}</span><i class="leading-[1.2] before:content-['\f0d7'] before:font-[Font_Awesome_5_Pro] before:font-black before:pl-[2px] before:w-[0.8em] before:inline-block before:text-[1em] before:not-italic before:leading-[1em] before:text-right before:antialiased"></i>
                         </button>
-                        <div id="menu-more" class="popup-menu-parent button-menu-parent first-popup">
-                            <ul class="popup-menu">
+                        <div id="menu-more" class="popup-menu-parent absolute top-[33px] left-px right-px z-[15] bg-[#f0f0f0] border-t border-[rgba(0,0,0,0.12)] shadow-[0_1px_2px_0_rgba(0,0,0,0.4)]">
+                            <ul class="list-none m-0">
                                 {% url2 contacts_delete as delete_url %}
-                                <li><a class="menu submit delete index contacts-index-delete" data-action="{{ delete_url }}"><i></i>{% trans "Delete" context "unknown" %}</a></li>
+                                <li><a class="menu submit delete index contacts-index-delete block border-0 text-[#222] text-[11px] font-medium uppercase py-[8px] px-[16px] m-0 cursor-pointer no-underline whitespace-nowrap transition-colors duration-200 hover:bg-[#f8f8f8] hover:text-[#ef5350]" data-action="{{ delete_url }}"><i></i>{% trans "Delete" context "unknown" %}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                     {% trans "No contacts selected." context "unknown" %}
                 </span>
             </div>
-            <div class="index-message"></div>
+            <div class="index-message w-full"></div>
 
             <div
                 id="confirm-delete-modal"
@@ -99,67 +99,67 @@
         </div>
 
         <form class="index-form form" method="post" action="">
-            <table class="contacts-table index-table">
-                <thead>
-                    <tr class="header">
-                        <th class="checkbox cell first-cell">
-                            <div><input type="checkbox" name="menu" data-total-count="{{ companies.paginator.count|unlocalize }}" data-limit-count="{{ pagination_limit|unlocalize }}" value="" /></div>
-                        </th>
-                        {% trans "Company" context "unknown" as trans_msg %}
-                        <th class="cell">{% index_header trans_msg "n" %}</th>
-                        {% trans "Address" context "unknown" as trans_msg %}
-                        <th class="cell">{% index_header trans_msg "a" %}</th>
-                        {% trans "Contact Name" context "unknown" as trans_msg %}
-                        <th class="cell">{% index_header trans_msg "c" %}</th>
-                        {% trans "Phone" context "unknown" as trans_msg %}
-                        <th class="cell last-cell">{% index_header trans_msg "p" %}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for company in companies %}
-                        <tr class="{% cycle "odd" "even" %} {{ company.index_class }}">
-                            <td class="checkbox cell hoverable first-cell">
-                                <input type="checkbox" name="id" value="{{ company.id|unlocalize }}" />
-                            </td>
-                            <td class="name cell hoverable link">
-                                {% spaceless %}
-                                    <a href="{% url2 contacts_view company.id %}" class="company-url">
-                                        {% if company.email %}
-                                            {{ company.company_name|default:company.email|default_if_none:'' }}
-                                        {% else %}
-                                            {{ company.company_name|default_if_none:'' }}
-                                        {% endif %}
-                                    </a>
-                                {% endspaceless %}
-                            </td>
-                            <td class="address cell last-cell hoverable">
-                                {% get_address_inline company request.account.country as address_text %}
-                                <div class="address" data-id="{{ company.billing_address_id|default_if_none:''|unlocalize }}">
-                                    {% if address_text %}{{ address_text }}{% endif %}
-                                </div>
-                            </td>
-                            <td class="contact cell hoverable">
-                                <div class="contact-name" data-id="{{ company.billing_contact_id|default_if_none:''|unlocalize }}">
-                                    {% if company.first_name or company.last_name %}{{ company.first_name }} {{ company.last_name }}{% endif %}
-                                </div>
-                            </td>
-                            <td class="phone cell last-cell hoverable">
-                                <div class="contact-phone">
-                                    {% if company.phone_number %}{{ company.phone_number }}{% endif %}
-                                </div>
-                            </td>
+                <table class="contacts-table index-table w-full border-collapse text-left text-sm text-[#303030]">
+                    <thead>
+                        <tr class="header bg-white">
+                            <th class="checkbox cell first-cell w-4 border-solid border-b border-[#f2efd0] px-3 py-[11px]">
+                                <div><input type="checkbox" name="menu" data-total-count="{{ companies.paginator.count|unlocalize }}" data-limit-count="{{ pagination_limit|unlocalize }}" value="" /></div>
+                            </th>
+                            {% trans "Company" context "unknown" as trans_msg %}
+                            <th class="cell border-solid border-b border-[#f2efd0] px-2 py-[11px] font-medium">{% index_header trans_msg "n" %}</th>
+                            {% trans "Address" context "unknown" as trans_msg %}
+                            <th class="cell border-solid border-b border-[#f2efd0] px-2 py-[11px] font-medium">{% index_header trans_msg "a" %}</th>
+                            {% trans "Contact Name" context "unknown" as trans_msg %}
+                            <th class="cell border-solid border-b border-[#f2efd0] px-2 py-[11px] font-medium">{% index_header trans_msg "c" %}</th>
+                            {% trans "Phone" context "unknown" as trans_msg %}
+                            <th class="cell border-solid border-b border-[#f2efd0] px-3 py-[11px] font-medium">{% index_header trans_msg "p" %}</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for company in companies %}
+                            <tr class="group bg-white hover:bg-[#fafafa] transition-colors [&:has(input[type=checkbox]:checked)]:bg-[#fffcdb] {{ company.index_class }}">
+                                <td class="checkbox cell hoverable first-cell w-4 border-b border-solid border-[#f2efd0] border-l-2 border-l-transparent py-2 pl-[12px]">
+                                    <input type="checkbox" name="id" value="{{ company.id|unlocalize }}" />
+                                </td>
+                                <td class="cell hoverable link border-b border-[#f2efd0] border-solid p-2 leading-[1.7] max-w-[150px]">
+                                    {% spaceless %}
+                                        <a href="{% url2 contacts_view company.id %}" class="company-url block truncate text-[#333] group-hover:text-[#3672a3] group-hover:underline leading-[1.7]">
+                                            {% if company.email %}
+                                                {{ company.company_name|default:company.email|default_if_none:'' }}
+                                            {% else %}
+                                                {{ company.company_name|default_if_none:'' }}
+                                            {% endif %}
+                                        </a>
+                                    {% endspaceless %}
+                                </td>
+                                <td class="address cell hoverable border-b border-[#f2efd0] border-solid p-2">
+                                    {% get_address_inline company request.account.country as address_text %}
+                                    <div class="address truncate" data-id="{{ company.billing_address_id|default_if_none:''|unlocalize }}">
+                                        {% if address_text %}{{ address_text }}{% endif %}
+                                    </div>
+                                </td>
+                                <td class="cell hoverable border-b border-[#f2efd0] border-solid p-2 max-w-[460px]">
+                                    <div class="contact-name truncate" data-id="{{ company.billing_contact_id|default_if_none:''|unlocalize }}">
+                                        {% if company.first_name or company.last_name %}{{ company.first_name }} {{ company.last_name }}{% endif %}
+                                    </div>
+                                </td>
+                                <td class="cell hoverable border-b border-[#f2efd0] border-solid px-3 py-[11px] max-w-[120px]">
+                                    <div class="contact-phone truncate">
+                                        {% if company.phone_number %}{{ company.phone_number }}{% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             {% render_pagination companies %}
             {% csrf_token %}
             <input name="index_all_enabled" type="hidden" value="0"/>
         </form>
     {% else %}
-        <div class="index-empty">
-            <div>{% blocktrans context "unknown" %}There are no contacts in your account yet.{% endblocktrans %}</div>
-            <a href="{% url "contacts_new" %}">{% blocktrans context "unknown" %}Add a new contact.{% endblocktrans %}</a>
+        <div class="border-2 border-dashed border-[#D8D8D8] rounded-[8px] mt-[32px] mb-[48px] p-[50px] text-center">
+            <div class="mb-[0.8em]">{% blocktrans context "unknown" %}There are no contacts in your account yet.{% endblocktrans %}</div>
+            <a href="{% url "contacts_new" %}" class="text-[1.2em] font-medium no-underline">{% blocktrans context "unknown" %}Add a new contact.{% endblocktrans %}</a>
         </div>
     {% endif %}
 {% endblock main %}
